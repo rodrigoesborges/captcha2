@@ -1,0 +1,21 @@
+Package: captchaReceita
+Type: Package
+Title: Quebrando Captcha Da Receita
+Version: 0.1
+Date: 2015-06-25
+Author: Julio Trecenti, Daniel Falbel
+Maintainer: Julio Trecenti <julio.trecenti@gmail.com>
+Description: Ferramentas uteis para quebrar os dados da receita.
+License: MIT
+LazyData: TRUE
+Imports:
+    rvest,
+    jpeg,
+    magrittr,
+    xml2,
+    Rcpp
+Suggests:
+    knitr
+VignetteBuilder: knitr
+LinkingTo: Rcpp
+RoxygenNote: 5.0.1
