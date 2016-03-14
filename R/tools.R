@@ -44,6 +44,7 @@ ler <- function(a) {
 #' @export
 #' 
 desenhar <- function(d){
+  d <- dplyr::mutate(d, cor = rgb(r, r, r), id = 1:n())
   p <- ggplot2::ggplot(d, ggplot2::aes(x = x, y = y))
   p <- p + 
     ggplot2::coord_equal() + 

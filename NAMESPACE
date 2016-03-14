@@ -2,6 +2,7 @@
 
 export(converter_em_df)
 export(converter_em_matriz)
+export(cortar)
 export(desenhar)
 export(download)
 export(ler)

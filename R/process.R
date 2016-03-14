@@ -31,3 +31,21 @@ limpar <- function(img, n = 1, k = 6, x = 170, y = 30, lim = 0){
   
   arrumado %>% dplyr::filter(r == 0)
 }
+
+#' Cortar
+#' 
+#' Observando grande partes dos captchas vimos que a imagem está compreendida 
+#' no intervalo: x >= 10, x <= 180 e y >= 12, y <= 42
+#' 
+#' @param img imagem em formato de data.frame com as coluans x, y, r,g, e b
+#' @param x_min 10
+#' @param x_max 180
+#' @param y_min 12
+#' @param y_max 42
+#'
+#' @export
+cortar <- function(img, x_min = 10, x_max = 180, y_min = 12, y_max = 42){
+  img %>%
+    dplyr::filter(y >= y_min, y <= y_max, x >= x_min, x <= x_max) %>%
+    dplyr::mutate(y = y - y_min, x = x - x_min)
+}
