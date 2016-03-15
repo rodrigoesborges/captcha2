@@ -137,14 +137,13 @@ alinhar_por_posicao <- function(img){
 #'
 #' @export
 processar <- function(img, cortes = c(25, 55, 85, 120, 147)){
-  trat <- img %>%
+  img %>%
     cortar() %>% 
     limpar() %>% 
     picotar(cortes) %>% 
     limpar_por_posicao() %>%
     alinhar_por_posicao() %>%
-    redimensionar_por_posicao() %>%
-    imagem_em_bd()
+    redimensionar_por_posicao()
 }
 
 #' Arrumar BD 
@@ -164,6 +163,7 @@ arrumar <- function(dir, cortes = c(25, 55, 85, 120, 147)){
   result <- plyr::adply(nomes, .margin = 1, function(n, dir){
     a <- readRDS(paste0(dir, n$arqs))
     processar(a, cortes = cortes) %>%
+      imagem_em_bd() %>%
       acrescentar_letra(n$letras %>% unlist)
   }, dir = dir, .progress = "text") %>%
     dplyr::mutate_each(

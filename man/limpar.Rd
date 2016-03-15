@@ -10,7 +10,7 @@ limpar(img, n = 1, k = 6, x = 170, y = 30, lim = 0)
 
 limpar_por_posicao(img, n = 1, k = 6)
 
-preencher(img, x, y, lim)
+preencher(img, x, y, lim, x_min = 0, y_min = 0)
 }
 \arguments{
 \item{img}{imagem em formato de data.frame com as coluans x, y, r,g, e b}

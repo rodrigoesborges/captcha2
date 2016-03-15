@@ -92,8 +92,8 @@ converter_em_df <- function(m) {
 #' @rdname limpar
 #' 
 #' @export
-preencher <- function(img, x, y, lim){
-  img_completa = expand.grid(x = 0:x, y = 0:y)
+preencher <- function(img, x, y, lim, x_min = 0, y_min = 0){
+  img_completa = expand.grid(x = x_min:x, y = y_min:y)
   dplyr::left_join(img_completa, img, c('x', 'y')) %>% 
     dplyr::mutate(
       r = ifelse(is.na(r), 1, r), 
