@@ -4,7 +4,7 @@
 \alias{arrumar}
 \title{Arrumar BD}
 \usage{
-arrumar(dir)
+arrumar(dir, cortes = c(25, 55, 85, 120, 147))
 }
 \arguments{
 \item{dir}{diretorio com todos os captchas já processados em data.frames}

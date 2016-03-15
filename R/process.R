@@ -152,7 +152,7 @@ processar <- function(img, cortes = c(25, 55, 85, 120, 147)){
 #' @param dir diretorio com todos os captchas já processados em data.frames
 #'
 #' @export
-arrumar <- function(dir){
+arrumar <- function(dir, cortes = c(25, 55, 85, 120, 147)){
   arqs <- list.files(dir)
   
   nomes <- dplyr::data_frame(
@@ -163,7 +163,7 @@ arrumar <- function(dir){
   
   result <- plyr::adply(nomes, .margin = 1, function(n, dir){
     a <- readRDS(paste0(dir, n$arqs))
-    processar(a) %>%
+    processar(a, cortes = cortes) %>%
       acrescentar_letra(n$letras %>% unlist)
   }, dir = dir, .progress = "text") %>%
     dplyr::mutate_each(
