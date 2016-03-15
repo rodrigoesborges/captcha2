@@ -49,9 +49,9 @@ desenhar <- function(d){
   p <- p + 
     ggplot2::coord_equal() + 
     ggplot2::theme_bw()
-  if(!is.null(d$grupo)) {
+  if(!is.null(d$posicao)) {
     p <- p + ggplot2::geom_point(shape = 15)
-    p <- p + ggplot2::facet_wrap(~grupo, scales = 'free_x', ncol = 6)
+    p <- p + ggplot2::facet_wrap(~posicao, scales = 'free_x', ncol = 6)
   } else {
     p <- p + ggplot2::geom_point(colour = d$cor, shape = 15, size = 3)
   }

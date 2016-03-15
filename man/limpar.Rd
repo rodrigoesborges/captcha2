@@ -2,10 +2,13 @@
 % Please edit documentation in R/process.R, R/tools.R
 \name{limpar}
 \alias{limpar}
+\alias{limpar_por_posicao}
 \alias{preencher}
 \title{Limpar imagem}
 \usage{
 limpar(img, n = 1, k = 6, x = 170, y = 30, lim = 0)
+
+limpar_por_posicao(img, n = 1, k = 6)
 
 preencher(img, x, y, lim)
 }
@@ -27,6 +30,12 @@ Como o default é 0, significa que apenas são considerados os pontos que são t
 \description{
 Limpar imagem
 
+Limpar por posição
+
 Preencher
+}
+\note{
+se você estiver usando a função \code{limpar_por_posicao}, é importante
+que o data.frame contenha uma coluna \code{posicao}
 }
 
