@@ -167,7 +167,7 @@ arrumar <- function(dir, cortes = c(25, 55, 85, 120, 147)){
       acrescentar_letra(n$letras %>% unlist)
   }, dir = dir, .progress = "text") %>%
     dplyr::mutate_each(
-      funs(na_1), 
+      dplyr::funs(na_1), 
       starts_with("x"))
 }
 

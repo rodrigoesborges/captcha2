@@ -57,3 +57,22 @@ predizer <- function(bd, modelo, fun = sum){
   
   paste(pred$letra, collapse = "")
 }
+
+
+#' Preparar banco de dados p/ modelo
+#'
+#' @param dir diretorio com todos os captchas já processados em data.frames
+#'
+#' @export
+preparar <- function(dir, cortes = list(
+  "1" = c(25, 55, 85, 120, 147),
+  "2" = c(30, 55, 87, 117, 145),
+  "3" = c(27, 60, 87, 120, 148)
+)){
+  r <- plyr::ldply(cortes, function(c, dir){
+    arrumar(dir, cortes = c)
+  }, dir = dir, .id = "corte")
+  r$posicao <- as.factor(r$posicao)
+  r$letras <- r$letras %>% tolower %>% as.factor
+  return(r)
+}
