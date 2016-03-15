@@ -101,3 +101,43 @@ preencher <- function(img, x, y, lim){
       )
 }
 
+#' Redimensionar
+#'
+#' http://stackoverflow.com/questions/10865489/scaling-an-r-image
+#'
+#' @rdname redimensionar
+#'
+#' @param img imagem
+#' @param w.out largura final
+#' @param h.out altura final
+#'
+#' @export
+redimensionar <- function(img, w.out, h.out) {
+  im <- converter_em_matriz(img)
+  w.in = nrow(im)
+  h.in = ncol(im)
+  # Create empty matrix
+  im.out = matrix(rep(0, w.out * h.out), nrow = w.out, ncol = h.out )
+  # Compute ratios -- final number of indices is n.out, spaced over range of 1:n.in
+  w_ratio = w.in / w.out
+  h_ratio = h.in / h.out
+  # Do resizing -- select appropriate indices
+  im.out <- im[ floor(w_ratio * 1:w.out), floor(h_ratio * 1:h.out)]
+  rownames(im.out) <- 1:nrow(im.out)
+  colnames(im.out) <- 1:ncol(im.out)
+  d_out <- converter_em_df(im.out) %>% dplyr::filter(r < 1)
+  return(d_out)
+}
+
+#' Redimensionar por grupo
+#' 
+#' @rdname redimensionar
+#' @export
+redimensionar_por_posicao <- function(img, w.out = 20, h.out = 20){
+  plyr::ldply(1:6, function(p, img){
+    img %>%
+      dplyr::filter(posicao == p) %>%
+      redimensionar(w.out, h.out) %>%
+      dplyr::mutate(posicao = p)
+  }, img = img)
+}
