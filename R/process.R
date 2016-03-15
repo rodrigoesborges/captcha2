@@ -129,3 +129,46 @@ alinhar_por_posicao <- function(img){
   }, img = img)
 }
 
+#' Processar Imagem
+#'
+#' @param img imagem em formato de data.frame com as colunas x, y, r,g, e b
+#' @param cortes passado p/ a função \code{picotar}
+#' 
+#'
+#' @export
+processar <- function(img, cortes = c(25, 55, 85, 120, 147)){
+  trat <- img %>%
+    cortar() %>% 
+    limpar() %>% 
+    picotar(cortes) %>% 
+    limpar_por_posicao() %>%
+    alinhar_por_posicao() %>%
+    redimensionar_por_posicao() %>%
+    imagem_em_bd()
+}
+
+#' Arrumar BD 
+#'
+#' @param dir diretorio com todos os captchas já processados em data.frames
+#'
+#' @export
+arrumar <- function(dir){
+  arqs <- list.files(dir)
+  
+  nomes <- dplyr::data_frame(
+    arqs = arqs,
+    letras = pegar_nome(arqs) %>%
+      stringr::str_split("")
+  )
+  
+  result <- plyr::adply(nomes, .margin = 1, function(n, dir){
+    a <- readRDS(paste0(dir, n$arqs))
+    processar(a) %>%
+      acrescentar_letra(n$letras %>% unlist)
+  }, dir = dir, .progress = "text") %>%
+    dplyr::mutate_each(
+      funs(na_1), 
+      starts_with("x"))
+}
+
+

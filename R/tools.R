@@ -141,3 +141,47 @@ redimensionar_por_posicao <- function(img, w.out = 20, h.out = 20){
       dplyr::mutate(posicao = p)
   }, img = img)
 }
+
+#' Imagem em bd
+#' 
+#' Transformar uma imagem em BD
+#' Ele faz isso p/ cada posição sendo assim do jeito correto
+#' 
+#' 
+imagem_em_bd <- function(img){
+  a <- img %>%
+    dplyr::mutate(
+      col = sprintf("x%02dy%02d",x, y) 
+        ) %>%
+    dplyr::select(-x, -y) %>% 
+    tidyr::spread(col, r, fill = 1)
+}
+
+#' Pegar nome pelo arquivo
+#'
+#' @param arq nome do arquivo
+#'
+pegar_nome <- function(arq){
+  stringr::str_sub(arq, 1, 6)
+}
+
+#' Acrescentar letra
+#'
+#' @param img imagem
+#' @param letras letras
+#'
+acrescentar_letra <- function(img, letras){
+  let <- dplyr::data_frame(
+    posicao = 1:6,
+    letras = letras
+  )
+  dplyr::left_join(img, let, by = "posicao")
+}
+
+#' Tranformar NA em 1
+#'
+#' @param x vetor
+#'
+na_1 <- function(x){
+  ifelse(is.na(x), 1, x)
+}
