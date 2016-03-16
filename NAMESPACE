@@ -3,6 +3,7 @@
 export(alinhar)
 export(alinhar_por_posicao)
 export(arrumar)
+export(calcular_erro)
 export(converter_em_df)
 export(converter_em_matriz)
 export(cortar)

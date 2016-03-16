@@ -16,12 +16,11 @@ decodificar <- function(arq, modelo, fun = sum){
 #'
 #' @param img imagem
 #' 
-processar_nova_imagem <- function(img){
-  cortes = list(
-    "1" = c(25, 55, 85, 120, 147),
-    "2" = c(30, 55, 87, 117, 145),
-    "3" = c(27, 60, 87, 120, 148)
-    )
+processar_nova_imagem <- function(img, cortes = list(
+  "1" = c(25, 55, 85, 120, 147),
+  "2" = c(30, 55, 87, 117, 145),
+  "3" = c(27, 60, 87, 120, 148)
+)){
   
   r <- plyr::ldply(cortes, function(c, img){
     processar(img, cortes = c) %>%
@@ -57,7 +56,6 @@ predizer <- function(bd, modelo, fun = sum){
   
   paste(pred$letra, collapse = "")
 }
-
 
 #' Preparar banco de dados p/ modelo
 #'
@@ -101,6 +99,27 @@ separar <- function(bd, n_validacao = 100, seed = 500){
   ))
 }
 
-
+#' Calcular erro
+#'
+#' @param bd bd p/ o qual vc quer calcular o erro
+#'
+#' @export
+calcular_erro <- function(bd){
+   predicoes <- bd %>% dplyr::group_by(arqs) %>% 
+    dplyr::do(pred = predizer(., modelo))
+   
+   predicoes$real <- pegar_nome(predicoes$arqs) %>% tolower
+   
+   acerto_captcha <- mean(predicoes$real == predicoes$pred)
+   
+   predicoes_real <- predicoes$real %>% stringr::str_split("") %>% unlist
+   predicoes_pred <- predicoes$pred %>% stringr::str_split("") %>% unlist
+   acerto_letra <- mean(predicoes_real == predicoes_pred)
+   
+   data.frame(
+     acerto = c("captcha", "letra"),
+     valor = c(acerto_captcha, acerto_letra)
+   )
+}
 
 

@@ -4,7 +4,8 @@
 \alias{processar_nova_imagem}
 \title{Processar nova imagem}
 \usage{
-processar_nova_imagem(img)
+processar_nova_imagem(img, cortes = list(`1` = c(25, 55, 85, 120, 147), `2` =
+  c(30, 55, 87, 117, 145), `3` = c(27, 60, 87, 120, 148)))
 }
 \arguments{
 \item{img}{imagem}
