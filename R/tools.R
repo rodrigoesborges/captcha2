@@ -11,7 +11,8 @@ download <- function(dest = NULL) {
     rvest::html_attr("src")
   captcha <- gsub('^\\.', '', captcha)
   if(is.null(dest)) dest <- tempfile()
-  download.file(url = paste0(base, captcha), destfile = dest)
+  # download.file(url = paste0(base, captcha), destfile = dest, mode = "wb")
+  httr::GET(paste0(base, captcha), httr::write_disk(dest, overwrite = T))
   return(dest)
 }
 

@@ -76,3 +76,31 @@ preparar <- function(dir, cortes = list(
   r$letras <- r$letras %>% tolower %>% as.factor
   return(r)
 }
+
+#' Separar em construção e validação
+#'
+#' @param bd banco de dados total.
+#' @param n_validacao numero de casos na validação
+#' @param seed semente usada 
+#'
+#' @export
+separar <- function(bd, n_validacao = 100, seed = 500){
+  set.seed(seed)
+  
+  bd_aux <- bd %>% 
+    dplyr::select(arqs) %>% 
+    unique() %>% 
+    dplyr::sample_n(100)
+  
+  bd_teste <- dplyr::left_join(bd_aux, bd, by = "arqs")
+  bd_treino <- dplyr::anti_join(bd, bd_teste, by = "arqs")
+  
+  return(list(
+    "teste" = bd_teste,
+    "treino" = bd_treino
+  ))
+}
+
+
+
+
