@@ -1,0 +1,83 @@
+---
+title: "Quebrando o captcha da Receita Federal"
+author: "Daniel Falbel"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Esse pacote serve para quebrar o *captcha* da Receita Federal que aparece 
+[neste endereço](http://www.receita.fazenda.gov.br/pessoajuridica/cnpj/cnpjreva/cnpjreva_solicitacao2.asp).
+
+Um exemplo deste *captcha* pode ser observado na imagem abaixo.
+
+```{r, fig = "hold"}
+library(captchaReceita)
+library(magrittr)
+a <- download() %>% ler()
+b <- download() %>% ler()
+a %>%
+  desenhar()
+b %>% 
+  desenhar()
+```
+
+## Preparação do banco de dados
+
+Depois da classificação de 1100 captchas manualmente. Criamos um algoritmo capaz de processá-los em formatos que podem ser inseridos em um algoritmo de classificação.
+
+Por exemplo, a imagem tratada fica neste formato.
+
+```{r, fig = "hold"}
+a %>% captchaReceita:::processar() %>% desenhar()
+b %>% captchaReceita:::processar() %>% desenhar()
+```
+
+Usamos a função `preparar` para preparar um banco de dados completo.
+
+```{r, eval = F}
+bd <- preparar(dir = "data-raw/")
+```
+
+## Modelagem
+
+Depois de preparar o banco de dados, separamos o banco de dados em construção e 
+validação e ajustamos um modelo de random forest.
+
+A função `separar` separa o banco em duas partes.
+
+```{r, eval = F}
+bd_s <- separar(bd)
+```
+
+O ajuste do modelo foi realizado da seguinte forma.
+
+```{r, eval = F}
+library(randomForest)
+modelo <- randomForest(letras ~ ., data = bd_s$treino %>% dplyr::select(-arqs))
+```
+
+Agora podemos verificar o acerto na base de validação com o seguinte comando:
+
+```{r, echo=FALSE}
+load("../data/bd_s.rda")
+load("../data/modelo.rda")
+```
+
+
+```{r}
+calcular_erro(bd_s$teste)
+```
+
+E verificar o erro na base de construção.
+
+```{r}
+calcular_erro(bd_s$treino)
+```
+
+
+
+

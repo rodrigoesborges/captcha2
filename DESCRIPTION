@@ -8,14 +8,18 @@ Maintainer: Julio Trecenti <julio.trecenti@gmail.com>
 Description: Ferramentas uteis para quebrar os dados da receita.
 License: MIT
 LazyData: TRUE
+Depends:
+    magrittr
 Imports:
-    rvest,
-    jpeg,
-    magrittr,
-    xml2,
-    Rcpp
+    dplyr,
+    stringr,
+    plyr,
+    ggplot2,
+    httr,
+    rvest
 Suggests:
-    knitr
+    knitr,
+    rmarkdown
 VignetteBuilder: knitr
 LinkingTo: Rcpp
 RoxygenNote: 5.0.1
