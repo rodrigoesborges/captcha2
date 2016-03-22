@@ -169,6 +169,8 @@ arrumar <- function(dir, cortes = c(25, 55, 85, 120, 147)){
     dplyr::mutate_each(
       dplyr::funs(na_1), 
       starts_with("x"))
+  
+  return(result)
 }
 
 

@@ -186,3 +186,15 @@ acrescentar_letra <- function(img, letras){
 na_1 <- function(x){
   ifelse(is.na(x), 1, x)
 }
+
+#' Pipe operator
+#'
+#' See \code{\link[magrittr]{\%>\%}} for more details.
+#'
+#' @name %>%
+#' @rdname pipe
+#' @keywords internal
+#' @export
+#' @importFrom magrittr %>%
+#' @usage lhs \%>\% rhs
+NULL
