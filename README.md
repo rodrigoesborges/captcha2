@@ -77,15 +77,6 @@ calcular_erro(bd_s$teste)
 #> 2   letra 0.9633333
 ```
 
-E verificar o erro na base de construção.
-
-``` r
-calcular_erro(bd_s$treino)
-#>    acerto valor
-#> 1 captcha     1
-#> 2   letra     1
-```
-
 Previsão
 ========
 
@@ -96,9 +87,9 @@ arq <- download()
 arq %>% ler() %>% desenhar()
 ```
 
-![](README-unnamed-chunk-10-1.png)<!-- -->
+![](README-unnamed-chunk-9-1.png)<!-- -->
 
 ``` r
 decodificar(arq, modelo)
-#> [1] "h3pkil"
+#> [1] "du8mqa5"
 ```

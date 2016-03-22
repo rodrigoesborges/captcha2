@@ -19,7 +19,7 @@ Esse pacote serve para quebrar o *captcha* da Receita Federal que aparece
 
 Um exemplo deste *captcha* pode ser observado na imagem abaixo.
 
-```{r, fig = "hold"}
+```{r}
 library(captchaReceita)
 library(magrittr)
 a <- download() %>% ler()
@@ -36,7 +36,7 @@ Depois da classificação de 1100 captchas manualmente. Criamos um algoritmo cap
 
 Por exemplo, a imagem tratada fica neste formato.
 
-```{r, fig = "hold"}
+```{r}
 a %>% captchaReceita:::processar() %>% desenhar()
 b %>% captchaReceita:::processar() %>% desenhar()
 ```
@@ -73,15 +73,8 @@ load("data/bd_s.rda")
 load("data/modelo.rda")
 ```
 
-
 ```{r}
 calcular_erro(bd_s$teste)
-```
-
-E verificar o erro na base de construção.
-
-```{r}
-calcular_erro(bd_s$treino)
 ```
 
 # Previsão
@@ -93,5 +86,3 @@ arq <- download()
 arq %>% ler() %>% desenhar()
 decodificar(arq, modelo)
 ```
-
-
