@@ -13,14 +13,14 @@ a %>%
   desenhar()
 ```
 
-![](README-unnamed-chunk-2-1.png)<!-- -->
+![](README-unnamed-chunk-2-1.png)
 
 ``` r
 b %>% 
   desenhar()
 ```
 
-![](README-unnamed-chunk-2-2.png)<!-- -->
+![](README-unnamed-chunk-2-2.png)
 
 Preparação do banco de dados
 ----------------------------
@@ -33,13 +33,13 @@ Por exemplo, a imagem tratada fica neste formato.
 a %>% captchaReceita:::processar() %>% desenhar()
 ```
 
-![](README-unnamed-chunk-3-1.png)<!-- -->
+![](README-unnamed-chunk-3-1.png)
 
 ``` r
 b %>% captchaReceita:::processar() %>% desenhar()
 ```
 
-![](README-unnamed-chunk-3-2.png)<!-- -->
+![](README-unnamed-chunk-3-2.png)
 
 Usamos a função `preparar` para preparar um banco de dados completo.
 
@@ -87,9 +87,9 @@ arq <- download()
 arq %>% ler() %>% desenhar()
 ```
 
-![](README-unnamed-chunk-9-1.png)<!-- -->
+![](README-unnamed-chunk-9-1.png)
 
 ``` r
 decodificar(arq, modelo)
-#> [1] "du8mqa5"
+#> [1] "1hl8xm"
 ```
