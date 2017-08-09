@@ -1,4 +1,7 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+** ESTE PACOTE NÂO ESTÁ MAIS ATIVO: TEMOS UMA VERSÃO MELHORADA [AQUI](https://github.com/decryptr/decryptr) **
+
 Esse pacote serve para quebrar o *captcha* da Receita Federal que aparece [neste endereço](http://www.receita.fazenda.gov.br/pessoajuridica/cnpj/cnpjreva/cnpjreva_solicitacao2.asp).
 
 Um exemplo deste *captcha* pode ser observado na imagem abaixo.
