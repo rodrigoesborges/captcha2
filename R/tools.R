@@ -4,8 +4,8 @@
 #' @export
 #' 
 download <- function(dest = NULL) {
-  base <- 'http://www.receita.fazenda.gov.br/pessoajuridica/cnpj/cnpjreva'
-  u <- paste0(base, '/cnpjreva_solicitacao2.asp')
+  base <- 'https://siconfi.tesouro.gov.br'
+  u <- paste0(base, '/siconfi/imageCaptcha?t=1510625913485')
   captcha <- xml2::read_html(u) %>%
     rvest::html_nodes("#imgCaptcha") %>%
     rvest::html_attr("src")
